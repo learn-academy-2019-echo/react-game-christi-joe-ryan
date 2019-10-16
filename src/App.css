@@ -11,8 +11,10 @@
 .nerd{
   border: 1px solid #fff;
   color: #ffffff;
+  text-align: center;
 }
 
 .imgs{
   max-height: 50px;
+  margin-top: 50px;
 }
