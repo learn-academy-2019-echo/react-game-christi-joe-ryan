@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import x from "./x.png";
 import o from "./o.png";
+import blank from "./blank.png";
 import './App.css';
 
 class Square extends Component {
@@ -8,7 +9,7 @@ class Square extends Component {
     const {id, handleClick, val} = this.props
     return (
       <div onClick={() =>handleClick(id)} className = "nerd">
-        <img className = "imgs" src =  {val === 1 ? x : val === 2 ? o : null} alt = ""></img>
+        <img className = "imgs" src =  {val === 1 ? x : val === 2 ? o : blank} alt = ""></img>
       </div>
     );
   }
