@@ -9,7 +9,6 @@
   background-color: #000000;
   background-position: center;
   text-align: center;
-  position: fixed;
 }
 .title{
   font-family: 'Game of Thrones', cursive;
@@ -134,11 +133,11 @@
 .playerOne{
   display: block;
   margin: auto;
-  width: 70%;
+  width: 235px;
 }
 
 .playerTwo{
   display: block;
   margin: auto;
-  width: 70%;
+  width: 235px;
 }

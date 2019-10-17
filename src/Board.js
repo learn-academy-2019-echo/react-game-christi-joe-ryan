@@ -25,7 +25,7 @@ import sansa from "./faces/sansa.png";
 import theon from "./faces/theon.png";
 import tyrion from "./faces/tyrion.png";
 import varys from "./faces/varys.png";
-
+import theme from "./theme.mp3";
 
 class Board extends Component {
   
@@ -45,8 +45,10 @@ class Board extends Component {
         character: characters[1],
         wins: 0
       },
+      musicPlaying: false,
       firstPlayerTurn : true,
-      gameOver: false
+      gameOver: false,
+      audio : new Audio(theme)
     }
   }
   
@@ -221,8 +223,26 @@ class Board extends Component {
     }
   }
   
+  componentDidMount(){
+    this.state.audio.play();
+    this.setState({musicPlaying:true});
+  }
+  
+  playMusic = () =>{
+    const{musicPlaying,audio} = this.state;
+    let isPlaying = musicPlaying;
+    isPlaying = !isPlaying;
+    if(isPlaying){
+      audio.play();
+    }
+    else{
+      audio.pause();
+    }
+    this.setState({musicPlaying:isPlaying});
+  }
+  
   render(){
-    let {squares, firstPlayer, secondPlayer, gameOver} = this.state;
+    let {squares, firstPlayer, secondPlayer, gameOver, musicPlaying} = this.state;
     let grid = squares.map((square,i) =>{
       return(
         <Square key = {i.toString()} id = {i} firstPlayer = {firstPlayer.character} secondPlayer = {secondPlayer.character} val = {squares[i]} handleClick = {this.handleClick}  />)
@@ -233,6 +253,7 @@ class Board extends Component {
         <Dropdown isFirst = {true} chooseCharacter = {this.chooseCharacter} currentCharacter = {firstPlayer.character}/>
         <Dropdown isFirst = {false} chooseCharacter = {this.chooseCharacter} currentCharacter = {secondPlayer.character}/>
         <button onClick = {this.resetGame} className = "resetButton">Reset</button>
+        <button onClick = {this.playMusic} className = "resetButton">{musicPlaying ? "Stop": "Play"}</button>
         <div className = "grid">
           {grid}
         </div>
