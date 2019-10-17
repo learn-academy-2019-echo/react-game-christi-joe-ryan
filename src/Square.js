@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import x from "./x.png";
-import o from "./o.png";
 import blank from "./blank.png";
 import arya from "./faces/arya.png";
 import bran from "./faces/bran.png";
@@ -73,8 +71,8 @@ class Square extends Component {
   render(){
     const {id, handleClick, val, firstPlayer, secondPlayer} = this.props
     return (
-      <div onClick={() =>handleClick(id)} className = "square">
-        <img className = "imgs" src =  {val === 1 ? this.getPicture(firstPlayer) : val === 2 ? this.getPicture(secondPlayer) : blank} alt = {blank}></img>
+      <div onClick={() =>handleClick(id)} className = {val === null ? "square" : "square"}>
+        <img className = "face" src =  {val === 1 ? this.getPicture(firstPlayer) : val === 2 ? this.getPicture(secondPlayer) : blank} alt = {blank}></img>
       </div>
     );
   }

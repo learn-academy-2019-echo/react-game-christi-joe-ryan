@@ -28,16 +28,23 @@ class Dropdown extends Component {
       
     }
   }
+  
+  forceClose = () => {
+    this.setState({ menuShowing: false }, () => {
+        document.removeEventListener('click', this.closeMenu);
+      });
+  }
 
   render() {
     const {isFirst, chooseCharacter, currentCharacter} = this.props;
     let playerButtons = characters.map((character,i) =>{
       return(
-        <button key = {i.toString()} className = {character === currentCharacter ? "currentCharacterButton" : "characterButton"} onClick={() =>chooseCharacter(isFirst, character)}>{character}</button>)
+        <button key = {i.toString()} className = {character === currentCharacter ? "currentCharacterButton" : "characterButton"} 
+        onClick={() =>{chooseCharacter(isFirst, character); this.forceClose()}}>{character}</button>)
     })
     return (
       <div>
-        <button onClick={this.showMenu} className = "dropdownButton">{isFirst ? "First Player" : "Second Player"}</button>
+        <button onClick={this.showMenu} className = "dropdownButton">{isFirst ? "Player One" : "Player Two"}</button>
         {
           this.state.menuShowing
             ? (
@@ -60,8 +67,3 @@ class Dropdown extends Component {
 }
 
 export default Dropdown
-
-// <button key = "0" character = "Khal Drogo" />
-//                 <button> Jon Snow </button>
-//                 <button> Rickon Stark </button>
-//                 <button> no one </button>

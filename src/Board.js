@@ -3,7 +3,29 @@ import Square from "./Square.js";
 import winningConditions from './winningConditions.js';
 import characters from "./characters.js";
 import './App.css';
-import Dropdown from './Dropdown.js'
+import Dropdown from './Dropdown.js';
+import blank from "./blank.png";
+import arya from "./faces/arya.png";
+import bran from "./faces/bran.png";
+import brienne from "./faces/brienne.png";
+import cersei from "./faces/cersei.png";
+import daenerys from "./faces/daenerys.png";
+import davos from "./faces/davos.png";
+import euron from "./faces/euron.png";
+import greyWorm from "./faces/greyWorm.png";
+import hound from "./faces/hound.png";
+import jamie from "./faces/jamie.png";
+import jonSnow from "./faces/jonSnow.png";
+import jorah from "./faces/jorah.png";
+import melisandre from "./faces/melisandre.png";
+import missandei from "./faces/missandei.png";
+import nightKing from "./faces/nightKing.png";
+import samwell from "./faces/samwell.png";
+import sansa from "./faces/sansa.png";
+import theon from "./faces/theon.png";
+import tyrion from "./faces/tyrion.png";
+import varys from "./faces/varys.png";
+
 
 class Board extends Component {
   
@@ -14,16 +36,64 @@ class Board extends Component {
       firstPlayer : {
         spaces: [],
         won : false,
-        character: characters[0]
+        character: characters[0],
+        wins: 0
       },
       secondPlayer : {
         spaces: [],
         won : false,
-        character: characters[1]
+        character: characters[1],
+        wins: 0
       },
       firstPlayerTurn : true,
       gameOver: false
     }
+  }
+  
+  getPicture = (character) => {
+    switch(character){
+      case "Arya Stark":
+        return arya;
+      case "Bran Stark":
+        return bran;
+      case "Brienne of Tarth":
+        return brienne;
+      case "Cersei Lannister":
+        return cersei;
+      case "Daenerys Targaryean":
+        return daenerys;
+      case "Davos Seaworth":
+        return davos;
+      case "Euron Greyjoy":
+        return euron;
+      case "Grey Worm":
+        return greyWorm;
+      case "The Hound":
+        return hound;
+      case "Jamie Lannister":
+        return jamie;
+      case "Jon Snow":
+        return jonSnow;
+      case "Jorah Mormont":
+        return jorah;
+      case "Melisandre":
+        return melisandre;
+      case "Missandei":
+        return missandei;
+      case "Night King":
+        return nightKing;
+      case "Samwell Tarly":
+        return samwell;
+      case "Sansa Stark":
+        return sansa;
+      case "Theon Greyjoy":
+        return theon;
+      case "Tyrion Lannister":
+        return tyrion;
+      case "Varys":
+        return varys;
+    }
+    return jonSnow;
   }
   
   checkIfWinner = () =>{
@@ -45,7 +115,9 @@ class Board extends Component {
     }
     if(firstWon){
       this.setState({gameOver: true});
-      firstPlayer["won"] = true
+      firstPlayer["won"] = true;
+      let nuWins = firstPlayer.wins + 1;
+      firstPlayer["wins"] = nuWins;
       this.setState({firstPlayer});
       return;
     }
@@ -69,6 +141,8 @@ class Board extends Component {
     if(secondWon){
       this.setState({gameOver: true});
       secondPlayer["won"] = true
+      let nuWins = secondPlayer.wins + 1;
+      secondPlayer["wins"] = nuWins;
       this.setState({secondPlayer});
       return;
     }
@@ -155,12 +229,28 @@ class Board extends Component {
     })
     return (
       <div className = "backgroundStuff">
-        <h1 className = "title">{firstPlayer.won ? firstPlayer.character + " Won" : secondPlayer.won ? secondPlayer.character + " Won" : gameOver ? "It's a Tie" : "Game Of Thrones"}</h1>
+        <h1 className = "glow">{firstPlayer.won ? firstPlayer.character + " Won" : secondPlayer.won ? secondPlayer.character + " Won" : gameOver ? "It's a Tie" : "Game Of Thrones"}</h1>
         <Dropdown isFirst = {true} chooseCharacter = {this.chooseCharacter} currentCharacter = {firstPlayer.character}/>
         <Dropdown isFirst = {false} chooseCharacter = {this.chooseCharacter} currentCharacter = {secondPlayer.character}/>
         <button onClick = {this.resetGame} className = "resetButton">Reset</button>
         <div className = "grid">
           {grid}
+        </div>
+        <div className = "characterGrid">
+          <img className = "playerOne" src =  {this.getPicture(firstPlayer.character)} alt = {blank}></img>
+          <img className = "playerTwo" src =  {this.getPicture(secondPlayer.character)} alt = {blank}></img>
+        </div>
+        <div className = "nameGrid">
+          <h1>{firstPlayer.character}</h1>
+          <h1>{secondPlayer.character}</h1>
+        </div>
+        <div className = "playerGrid">
+          <h1>Player One</h1>
+          <h1>Player Two</h1>
+        </div>
+        <div className = "winsGrid">
+          <h1>{firstPlayer.wins}</h1>
+          <h1>{secondPlayer.wins}</h1>
         </div>
       </div>
     );
@@ -168,5 +258,3 @@ class Board extends Component {
 }
 
 export default Board;
-
-//.map(key = i functionName = {this.functionName})
