@@ -6,10 +6,11 @@ import './App.css';
 
 class Square extends Component {
   render(){
-    const {id, handleClick, val} = this.props
+    const {id, handleClick, val, firstPlayer, secondPlayer} = this.props
     return (
-      <div onClick={() =>handleClick(id)} className = "nerd">
+      <div onClick={() =>handleClick(id)} className = "square">
         <img className = "imgs" src =  {val === 1 ? x : val === 2 ? o : blank} alt = ""></img>
+        <h1>{val === 1 ? firstPlayer : val === 2 ? secondPlayer : ""}</h1>
       </div>
     );
   }

@@ -1,3 +1,5 @@
+
+
 .grid {
   height: 500px;
   width: 500px;
@@ -8,13 +10,20 @@
   margin: auto;
 }
 
-.nerd{
+.square{
   border: 1px solid #fff;
   color: #ffffff;
   text-align: center;
 }
 
+.square: hover{
+  color: #ffffff;
+}
+
 .imgs{
-  max-height: 50px;
-  margin-top: 50px;
+  /*max-height: 50px;*/
+  /*margin-top: 50px;*/
+  display: block;
+  margin: auto;
+  width: 100%;
 }

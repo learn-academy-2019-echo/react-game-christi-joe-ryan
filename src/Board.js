@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Square from "./Square.js";
 import winningConditions from './winningConditions.js';
 import './App.css';
+import Dropdown from './Dropdown.js'
 
 class Board extends Component {
   
@@ -11,11 +12,13 @@ class Board extends Component {
       squares: Array(9).fill(null),
       firstPlayer : {
         spaces: [],
-        won : false
+        won : false,
+        character: ""
       },
       secondPlayer : {
         spaces: [],
-        won : false
+        won : false,
+        character: ""
       },
       firstPlayerTurn : true,
       gameOver: false
@@ -120,15 +123,29 @@ class Board extends Component {
     this.setState({gameOver : false});
   }
   
+  chooseCharacter = (isFirst, character) =>{
+    let {firstPlayer,secondPlayer} = this.state
+    if(isFirst){
+      firstPlayer["character"] = character;
+      this.setState({firstPlayer});
+    }
+    else{
+      secondPlayer["character"] = character;
+      this.setState({secondPlayer});
+    }
+  }
+  
   render(){
     let {squares, firstPlayer, secondPlayer, gameOver} = this.state;
     let grid = squares.map((square,i) =>{
       return(
-        <Square key = {i.toString()} id = {i} val = {squares[i]} handleClick = {this.handleClick}  />)
+        <Square key = {i.toString()} id = {i} firstPlayer = {firstPlayer.character} secondPlayer = {secondPlayer.character} val = {squares[i]} handleClick = {this.handleClick}  />)
     })
     return (
-      <div>
+      <div className = "backgroundStuff">
         <h1>{firstPlayer.won ? "First Player Won!" : secondPlayer.won ? "Second Player Won!" : gameOver ? "Cat's Game!" : "Tic-Tac-Tizzle"}</h1>
+        <Dropdown isFirst = {true} chooseCharacter = {this.chooseCharacter}/>
+        <Dropdown isFirst = {false} chooseCharacter = {this.chooseCharacter}/>
         <button onClick = {this.resetGame}>Reset</button>
         <div className = "grid">
           {grid}
