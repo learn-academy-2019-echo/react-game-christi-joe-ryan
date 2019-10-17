@@ -1,25 +1,40 @@
+.title{
+  font-family: 'Game of Thrones', cursive;
+  margin-top: 0px;
+}
 
-
+.backgroundStuff {
+  background-image: url("https://media.tenor.com/images/d740f94ccec97ab7dc4cd81c47e4c054/tenor.gif");
+  height: 100vh;
+  /*font: url("Game of Thrones.ttf") format("TrueType");*/
+  color: #ffffff;
+  margin: auto;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-color: #000000;
+  background-position: center;
+  text-align: center;
+}
 .grid {
   height: 500px;
   width: 500px;
   display: grid;
   grid-gap: 0px;
   grid-template-columns: repeat(3, 1fr);
-  background-color: #ff0000;
   margin: auto;
 }
-
 .square{
   border: 1px solid #fff;
+  /*background-color: #ff0000;*/
   color: #ffffff;
   text-align: center;
+  opacity: .75;
 }
-
-.square: hover{
+.square:hover{
   color: #ffffff;
+  opacity: 1;
+  transition: 1s;
 }
-
 .imgs{
   /*max-height: 50px;*/
   /*margin-top: 50px;*/

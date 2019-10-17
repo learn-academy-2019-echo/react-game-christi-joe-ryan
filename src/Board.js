@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Square from "./Square.js";
 import winningConditions from './winningConditions.js';
+import characters from "./characters.js";
 import './App.css';
 import Dropdown from './Dropdown.js'
 
@@ -13,12 +14,12 @@ class Board extends Component {
       firstPlayer : {
         spaces: [],
         won : false,
-        character: ""
+        character: characters[0]
       },
       secondPlayer : {
         spaces: [],
         won : false,
-        character: ""
+        character: characters[1]
       },
       firstPlayerTurn : true,
       gameOver: false
@@ -70,6 +71,17 @@ class Board extends Component {
       secondPlayer["won"] = true
       this.setState({secondPlayer});
       return;
+    }
+    const {squares} = this.state;
+    let endGame = true;
+    for(let i = 0; i < squares.length; i++){
+      if(squares[i] === null){
+        endGame = false;
+        break;
+      }
+    }
+    if(endGame){
+      this.setState({gameOver: true});
     }
   }
   
@@ -143,7 +155,7 @@ class Board extends Component {
     })
     return (
       <div className = "backgroundStuff">
-        <h1>{firstPlayer.won ? "First Player Won!" : secondPlayer.won ? "Second Player Won!" : gameOver ? "Cat's Game!" : "Tic-Tac-Tizzle"}</h1>
+        <h1 className = "title">{firstPlayer.won ? firstPlayer.character + " Won" : secondPlayer.won ? secondPlayer.character + " Won" : gameOver ? "It's a Tie" : "Game Of Thrones"}</h1>
         <Dropdown isFirst = {true} chooseCharacter = {this.chooseCharacter}/>
         <Dropdown isFirst = {false} chooseCharacter = {this.chooseCharacter}/>
         <button onClick = {this.resetGame}>Reset</button>
