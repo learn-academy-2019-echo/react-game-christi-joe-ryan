@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CharacterButton from "./CharacterButton.js";
 import characters from "./characters.js";
 import './App.css';
 
@@ -31,14 +30,14 @@ class Dropdown extends Component {
   }
 
   render() {
-    const {isFirst, chooseCharacter} = this.props;
+    const {isFirst, chooseCharacter, currentCharacter} = this.props;
     let playerButtons = characters.map((character,i) =>{
       return(
-        <button key = {i.toString()} onClick={() =>chooseCharacter(isFirst, character)}>{character}</button>)
+        <button key = {i.toString()} className = {character === currentCharacter ? "currentCharacterButton" : "characterButton"} onClick={() =>chooseCharacter(isFirst, character)}>{character}</button>)
     })
     return (
       <div>
-        <button onClick={this.showMenu}>{isFirst ? "First Player" : "Second Player"}</button>
+        <button onClick={this.showMenu} className = "dropdownButton">{isFirst ? "First Player" : "Second Player"}</button>
         {
           this.state.menuShowing
             ? (

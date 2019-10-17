@@ -156,9 +156,9 @@ class Board extends Component {
     return (
       <div className = "backgroundStuff">
         <h1 className = "title">{firstPlayer.won ? firstPlayer.character + " Won" : secondPlayer.won ? secondPlayer.character + " Won" : gameOver ? "It's a Tie" : "Game Of Thrones"}</h1>
-        <Dropdown isFirst = {true} chooseCharacter = {this.chooseCharacter}/>
-        <Dropdown isFirst = {false} chooseCharacter = {this.chooseCharacter}/>
-        <button onClick = {this.resetGame}>Reset</button>
+        <Dropdown isFirst = {true} chooseCharacter = {this.chooseCharacter} currentCharacter = {firstPlayer.character}/>
+        <Dropdown isFirst = {false} chooseCharacter = {this.chooseCharacter} currentCharacter = {secondPlayer.character}/>
+        <button onClick = {this.resetGame} className = "resetButton">Reset</button>
         <div className = "grid">
           {grid}
         </div>
